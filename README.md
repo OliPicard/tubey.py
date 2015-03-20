@@ -15,6 +15,7 @@ You will need...
 <b> Why did you not use *insert 3rd party module here* </b>
 
 I decided to use xml.dom as the main scrapper method. It seemed very straight forward at the time. I had considered using lxml (a 3rd party module) however the module required additional dependencies. The wonderful people over at freenode's learn python did recommend suggest using etree method, This is something i'm looking at doing in the future as a faster rewrite. xml.dom works fine out of the box but is slower in comparison to some of the other methods mentioned.
+
 <b> Help! I'm getting an XML error when I attempt to run the code. </b>
 
 The TFL API relies heavily on the Microsoft Azure cloud, it may be that the API is down or Azure is having an outage.
