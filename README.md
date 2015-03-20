@@ -12,7 +12,7 @@ You will need...
 
 
 <h2>FAQ</h2>
-<b> Why did you not use <insert 3rd party module here/> </b>
+<b> Why did you not use *insert 3rd party module here* </b>
 
 I decided to use xml.dom as the main scrapper method. It seemed very straight forward at the time. I had considered using lxml (a 3rd party module) however the module required additional dependencies. The wonderful people over at freenode's learn python did recommend suggest using etree method, This is something i'm looking at doing in the future as a faster rewrite. xml.dom works fine out of the box but is slower in comparison to some of the other methods mentioned.
 <b> Help! I'm getting an XML error when I attempt to run the code. </b>
