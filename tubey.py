@@ -1,211 +1,162 @@
 __author__ = 'OliPicard'
-from urllib.request import urlopen
-from xml.dom import minidom
-# Developed by OliPicard
-# tubey.py is a simple line status console tool that provides live line status information via the TFL Cloud.
-# this script is licenced under the GNU GPL 3.0 Licence (contained inside the git report at github.com/olipicard/tubey.py)
-# tubey.py is provided free of charge and is 100% open sourced.
+from lxml import etree
+import requests
 
-def resp():
-    try:
-        return minidom.parse(urlopen('http://cloud.tfl.gov.uk/TrackerNet/LineStatus'))
-    except:
-        print('Oh dear its seems the api has borked. Have you looked at the Azure status page?')
-        return -1
+'''
+-----------------------------------------------------------------
+tubey.py provides you the latest information on tube disruptions.
 
+This program is licenced under the GNU GPL 3.0 Licence.
+The licence should be cloned along with the repo.
 
+tubey.py was developed by OliPicard.
+-----------------------------------------------------------------
+'''
 
+'''
+----------------------
+|HTTP (Do NOT change)|
+----------------------
+'''
+url = 'http://cloud.tfl.gov.uk/TrackerNet/LineStatus'
+resp = requests.get(url)  # grabbing url data via requests
+resp.encoding = 'utf-8'
+xmldoc = resp.text  # saving the response as text (requests cannot handle xml)
 
-def bakerloo(xmldoc):
-    linestatus = xmldoc.getElementsByTagName('LineStatus')[0]
-    status = linestatus.getElementsByTagName('Status')[0]
-    linename = linestatus.getElementsByTagName('Line')[0]
-    linestatusOne = linestatus.getAttribute('StatusDetails')
-    statusOne = status.getAttribute('Description')
-    linenameOne = linename.getAttribute('Name')
-    print(' ')
-    print(linenameOne + ' line')
-    print(statusOne)
-    print(linestatusOne)
-    print(' ')
+root = etree.fromstring(xmldoc)  # parsing xml from text
 
-def central(xmldoc):
-    linestatusb = xmldoc.getElementsByTagName('LineStatus')[1]
-    statusi = linestatusb.getElementsByTagName('Status')[0]
-    linenamei = linestatusb.getElementsByTagName('Line')[0]
-    linestatusTwo = statusi.getAttribute('StatusDetails')
-    statusTwo = statusi.getAttribute('Description')
-    linenameTwo= linenamei.getAttribute('Name')
-    print(' ')
-    print(linenameTwo + ' Line')
-    print(statusTwo)
-    print(linestatusTwo)
-    print(' ')
+def classic():
 
-def circle(xmldoc):
-    linestatusc = xmldoc.getElementsByTagName('LineStatus')[2]
-    statusf = linestatusc.getElementsByTagName('Status')[0]
-    linenameo = linestatusc.getElementsByTagName('Line')[0]
-    linestatusThree = linestatusc.getAttribute('StatusDetails')
-    statusThree = statusf.getAttribute('Description')
-    linenameThree = linenameo.getAttribute('Name')
-    print(' ')
-    print(linenameThree + ' Line')
-    print(statusThree)
-    print(linestatusThree)
-    print(' ')
-
-def district(xmldoc):
-    linestatusd = xmldoc.getElementsByTagName('LineStatus')[3]  # district line
-    statusd = linestatusd.getElementsByTagName('Status')[0]  # status msg
-    linenamep = linestatusd.getElementsByTagName('Line')[0]  # Line Name
-    linestatusFour = linestatusd.getAttribute('StatusDetails')  # Detailed Msg about any problems
-    statusFour = statusd.getAttribute('Description')  # description of the line status.
-    linenameFour = linenamep.getAttribute('Name')  # line name
-    print(' ')
-    print(linenameFour + ' Line')
-    print(statusFour)
-    print(linestatusFour)
-    print(' ')
-
-def hammersmithandcity(xmldoc):
-    linestatusp = xmldoc.getElementsByTagName('LineStatus')[4]
-    statusp = linestatusp.getElementsByTagName('Status')[0]
-    linenamef = linestatusp.getElementsByTagName('Line')[0]
-    linestatusFive = linestatusp.getAttribute('StatusDetails')
-    statusFive = statusp.getAttribute('Description')
-    linenameFive = linenamef.getAttribute('Name')
-    print(' ')
-    print(linenameFive + " Line")
-    print(statusFive)
-    print(linestatusFive)
-    print(' ')
+    for tube_line in root: # grabs all current data feeds. Thanks to reddit user /u/michaelkepler for providing this code.
+      # line_id = tube_line[1].get('ID')
+      line_name = tube_line[1].get('Name')
+      line_status = tube_line[2].get('Description')
+      status_details = tube_line.get('StatusDetails')
+      print(line_name, line_status, status_details)
 
 
 
-def Jubilee(xmldoc):
-    linestatusq = xmldoc.getElementsByTagName('LineStatus')[5]
-    statusj = linestatusq.getElementsByTagName('Status')[0]
-    linenamej = linestatusq.getElementsByTagName('Line')[0]
-    linestatusSix = linestatusq.getAttribute('StatusDetails')
-    statusSix = statusj.getAttribute('Description')
-    linenameSix = linenamej.getAttribute('Name')
-    print(' ')
-    print(linenameSix + " Line")
-    print(statusSix)
-    print(linestatusSix)
-    print(' ')
 
-def Metropolitan(xmldoc):
-    linestatusw = xmldoc.getElementsByTagName('LineStatus')[6]
-    statusw = linestatusw.getElementsByTagName('Status')[0]
-    linenamew = linestatusw.getElementsByTagName('Line')[0]
-    linestatusSeven = linestatusw.getAttribute('StatusDetails')
-    statusSeven = statusw.getAttribute('Description')
-    linenameSeven = linenamew.getAttribute('Name')
-    print(' ')
-    print(linenameSeven + ' Line')
-    print(statusSeven)
-    print(linestatusSeven)
-    print(' ')
+def bakerloo():  # thanks to stranac for explaining xpath to me
+    namezero = root.xpath('//default:LineStatus[@ID="0"]/default:Line/@Name', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    espzero = root.xpath('//default:LineStatus[@ID="0"]/default:Status/@Description', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    statuszero = root.xpath('//default:LineStatus[@ID="0"]/@StatusDetails', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    namezero.append('Line')
+    print(*namezero)
+    print(*espzero, sep='\n')
+    print(*statuszero)
 
-def Northern(xmldoc):
-    linestatuse = xmldoc.getElementsByTagName('LineStatus')[7]
-    statuse = linestatuse.getElementsByTagName('Status')[0]
-    linenamee = linestatuse.getElementsByTagName('Line')[0]
-    linestatusEight = linestatuse.getAttribute('StatusDetails')
-    statusEight = statuse.getAttribute('Description')
-    linenameEight = linenamee.getAttribute('Name')
-    print(' ')
-    print(linenameEight + ' Line')
-    print(statusEight)
-    print(linestatusEight)
-    print(' ')
+def central():
+    nameone = root.xpath('//default:LineStatus[@ID="1"]/default:Line/@Name', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    espone = root.xpath('//default:LineStatus[@ID="1"]/default:Status/@Description', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    statusone = root.xpath('//default:LineStatus[@ID="1"]/@StatusDetails', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    nameone.append('Line')
+    print(*nameone)
+    print(*espone, sep='\n')
+    print(*statusone)
 
-def piccadilly(xmldoc):
-    linestatusr = xmldoc.getElementsByTagName('LineStatus')[8]
-    statusr = linestatusr.getElementsByTagName('Status')[0]
-    linenamer = linestatusr.getElementsByTagName('Line')[0]
-    linestatusNine = linestatusr.getAttribute('StatusDetails')
-    statusNine = statusr.getAttribute('Description')
-    linenameNine = linenamer.getAttribute('Name')
-    print(' ')
-    print(linenameNine + ' Line')
-    print(statusNine)
-    print(linestatusNine)
-    print(' ')
 
-def victoria(xmldoc):
-    linestatust = xmldoc.getElementsByTagName('LineStatus')[9]
-    statust = linestatust.getElementsByTagName('Status')[0]
-    linenamer = linestatust.getElementsByTagName('Line')[0]
-    linestatusTen = linestatust.getAttribute('StatusDetails')
-    statusTen = statust.getAttribute('Description')
-    linenameTen = linenamer.getAttribute('Name')
-    print(' ')
-    print(linenameTen + ' Line')
-    print(statusTen)
-    print(linestatusTen)
-    print(' ')
+def circle():
+    nameten = root.xpath('//default:LineStatus[@ID="10"]/default:Line/@Name', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    esp = root.xpath('//default:LineStatus[@ID="10"]/default:Status/@Description', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    statusten = root.xpath('//default:LineStatus[@ID="10"]/@StatusDetails', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    nameten.append('Line')
+    print(*nameten)
+    print(*esp, sep='\n')
+    print(*statusten, sep='\n')
 
-def waterlooandcity(xmldoc):
-    linestatusy = xmldoc.getElementsByTagName('LineStatus')[10]
-    statusy = linestatusy.getElementsByTagName('Status')[0]
-    linenamey = linestatusy.getElementsByTagName('Line')[0]
-    linestatusEleven = linestatusy.getAttribute('StatusDetails')
-    statusEleven = statusy.getAttribute('Description')
-    linenameEleven = linenamey.getAttribute('Name')
-    print(' ')
-    print(linenameEleven + ' Line')
-    print(statusEleven)
-    print(linestatusEleven)
-    print(' ')
+def district():
+    nametwo = root.xpath('//default:LineStatus[@ID="2"]/default:Line/@Name', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    esptwo = root.xpath('//default:LineStatus[@ID="2"]/default:Status/@Description', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    statustwo = root.xpath('//default:LineStatus[@ID="2"]/@StatusDetails', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    nametwo.append('Line')
+    print(*nametwo)
+    print(*esptwo, sep='\n')
+    print(*statustwo)
 
-def overground(xmldoc):
-    linestatusu = xmldoc.getElementsByTagName('LineStatus')[11]
-    statusu = linestatusu.getElementsByTagName('Status')[0]
-    linenameu = linestatusu.getElementsByTagName('Line')[0]
-    linestatusTweleve = linestatusu.getAttribute('StatusDetails')
-    statusTweleve = statusu.getAttribute('Description')
-    linenameTweleve = linenameu.getAttribute('Name')
-    print(' ')
-    print(linenameTweleve + ' Line')
-    print(statusTweleve)
-    print(linestatusTweleve)
-    print(' ')
+def hammersmithandcity():
+    namethree = root.xpath('//default:LineStatus[@ID="8"]/default:Line/@Name', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    espthree = root.xpath('//default:LineStatus[@ID="8"]/default:Status/@Description', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    statusthree = root.xpath('//default:LineStatus[@ID="8"]/@StatusDetails', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    namethree.append('Line')
+    print(*namethree)
+    print(*espthree, sep='\n')
+    print(*statusthree)
 
-def dlr(xmldoc):
-    linestatusi = xmldoc.getElementsByTagName('LineStatus')[12]
-    statusi = linestatusi.getElementsByTagName('Status')[0]
-    linenamei = linestatusi.getElementsByTagName('Line')[0]
-    linestatusThirteen = linestatusi.getAttribute('StatusDetails')
-    statusThirteen = statusi.getAttribute('Description')
-    linenameThirteen = linenamei.getAttribute('Name')
-    print(' ')
-    print(linenameThirteen + ' Line')
-    print(statusThirteen)
-    print(linestatusThirteen)
-    print(' ')
+def jubilee():
+    namefour = root.xpath('//default:LineStatus[@ID="4"]/default:Line/@Name', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    espfour = root.xpath('//default:LineStatus[@ID="4"]/default:Status/@Description', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    statusfour = root.xpath('//default:LineStatus[@ID="4"]/@StatusDetails', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    namefour.append('Line')
+    print(*namefour)
+    print(*espfour, sep='\n')
+    print(*statusfour)
 
-# calling the requests inbound. uncomment to manually call.
-# bakerloo(resp())
-# central(resp())
-# circle(resp())
-# district(resp())
-# hammersmithandcity(resp())
-# Jubilee(resp())
-# Metropolitan(resp())
-# Northern(resp())
-# piccadilly(resp())
-# victoria(resp())
-# waterlooandcity(resp())
-# overground(resp())
-# dlr(resp())
+def metropolitan():
+    namefive = root.xpath('//default:LineStatus[@ID="9"]/default:Line/@Name',  namespaces={'default': 'http://webservices.lul.co.uk/'})
+    espfive = root.xpath('//default:LineStatus[@ID="9"]/default:Status/@Description', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    statusfive = root.xpath('//default:LineStatus[@ID="9"]/@StatusDetails', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    namefive.append('Line')
+    print(*namefive)
+    print(*espfive, sep='\n')
+    print(*statusfive)
+
+def northan():
+    namesix = root.xpath('//default:LineStatus[@ID="5"]/default:Line/@Name', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    espsix = root.xpath('//default:LineStatus[@ID="5"]/default:Status/@Description', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    statussix = root.xpath('//default:LineStatus[@ID="5"]/@StatusDetails', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    namesix.append('Line')
+    print(*namesix)
+    print(*espsix, sep='\n')
+    print(*statussix)
+
+def piccadilly():
+    nameseven = root.xpath('//default:LineStatus[@ID="6"]/default:Line/@Name', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    espseven = root.xpath('//default:LineStatus[@ID="6"]/default:Status/@Description', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    statusseven = root.xpath('//default:LineStatus[@ID="6"]/@StatusDetails', namespaces={'default': 'http://webservices.lul.co.uk'})
+    nameseven.append('Line')
+    print(*nameseven)
+    print(*espseven, sep='\n')
+    print(*statusseven)
+
+def victoria():
+    nameeight = root.xpath('//default:LineStatus[@ID="7"]/default:Line/@Name', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    espeight = root.xpath('//default:LineStatus[@ID="7"]/default:Status/@Description', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    statuseight = root.xpath('//default:LineStatus[@ID="7"]/@StatusDetails', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    nameeight.append('Line')
+    print(*nameeight)
+    print(*espeight, sep='\n')
+    print(*statuseight)
+
+def waterlooandcity():
+    namenine = root.xpath('//default:LineStatus[@ID="8"]/default:Line/@Name', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    espnine = root.xpath('//default:LineStatus[@ID="8"]/default:Status/@Description', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    statusnine = root.xpath('//default:LineStatus[@ID="8"]/@StatusDetails', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    namenine.append('Line')
+    print(*namenine)
+    print(*espnine, sep='\n')
+    print(*statusnine)
+
+def overground():
+    nameten = root.xpath('//default:LineStatus[@ID="82"]/default:Line/@Name', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    espten = root.xpath('//default:LineStatus[@ID="82"]/default:Status/@Description', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    statusten = root.xpath('//default:LineStatus[@ID="82"]/@StatusDetails', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    print(*nameten)
+    print(*espten, sep='\n')
+    print(*statusten)
+
+def dlr():
+    nameeleven = root.xpath('//default:LineStatus[@ID="81"]/default:Line/@Name', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    espeleven = root.xpath('//default:LineStatus[@ID="81"]/default:Status/@Description', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    statuseleven = root.xpath('//default:LineStatus[@ID="81"]/@StatusDetails', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    print(*nameeleven)
+    print(*espeleven, sep='\n')
+    print(*statuseleven)
 
 
 def menu():
     print('-' * 60)
-    print('Welcome to the TubeLineStatus.py application.\nThis code is operating under the GNU 3.0 licence.\nData feed provided by Transport for London.\nFull Sourcecode at http://github.com/olipicard/tubestatus.py')
+    print('Welcome to the Tubey.py.\nThis code is operating under the GNU 3.0 licence.\nData feed provided by Transport for London.\nFull Sourcecode at http://github.com/olipicard/tubestatus.py')
     print('-' * 60)
     print('1. All Lines (will be slower to request.)')
     print('2. Bakerloo line')
@@ -221,69 +172,90 @@ def menu():
     print('12. Waterloo and City line ')
     print('13. Overground')
     print('14. DLR')
-    print('15. Terminate this application.')
+    print('15. Classic All Lines')
+    print('16. Terminate this application.')
 
 loop = True
 while loop:
     menu()
     choice=int(input('please enter a number from the menu. '))
-    if choice not in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]:
+    if choice not in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]:
         print('sorry the number you have picked is invaild. please pick again from the menu. ')
         menu()
         choice=int(input('please enter a number from the menu. '))
     if choice == 1:
-        bakerloo(resp())
-        central(resp())
-        circle(resp())
-        district(resp())
-        hammersmithandcity(resp())
-        Jubilee(resp())
-        Metropolitan(resp())
-        Northern(resp())
-        piccadilly(resp())
-        victoria(resp())
-        waterlooandcity(resp())
-        overground(resp())
-        dlr(resp())
+        bakerloo()
+        central()
+        circle()
+        district()
+        hammersmithandcity()
+        jubilee()
+        metropolitan()
+        northan()
+        piccadilly()
+        victoria()
+        waterlooandcity()
+        overground()
+        dlr()
         escape = input('press any key to return back to the main menu.')
     if choice == 2:
-        bakerloo(resp())
+        bakerloo()
         escape = input('press any key to return back to the main menu.')
     if choice == 3:
-        central(resp())
+        central()
         escape = input('press any key to return back to the main menu.')
     if choice == 4:
-        circle(resp())
+        circle()
         escape = input('press any key to return back to the main menu.')
     if choice == 5:
-        district(resp())
+        district()
         escape = input('press any key to return back to the main menu.')
     if choice == 6:
-        hammersmithandcity(resp())
+        hammersmithandcity()
         escape = input('press any key to return back to the main menu.')
     if choice == 7:
-        Jubilee(resp())
+        jubilee()
         escape = input('press any key to return back to the main menu.')
     if choice == 8:
-        Metropolitan(resp())
+        metropolitan()
         escape = input('press any key to return back to the main menu.')
     if choice == 9:
-        Northern(resp())
+        northan()
         escape = input('press any key to return back to the main menu.')
     if choice == 10:
-        piccadilly(resp())
+        piccadilly()
         escape = input('press any key to return back to the main menu.')
     if choice == 11:
-        victoria(resp())
+        victoria()
         escape = input('press any key to return back to the main menu.')
     if choice == 12:
-        waterlooandcity(resp())
+        waterlooandcity()
         escape = input('press any key to return back to the main menu.')
     if choice == 13:
-        overground(resp())
+        overground()
         escape = input('press any key to return back to the main menu.')
     if choice == 14:
-        dlr(resp())
+        dlr()
         escape = input('press any key to return back to the main menu.')
     if choice == 15:
+        classic()
+        escape = input('press any key to return back to the main menu.')
+    if choice == 16:
+        print('Thank you for using tubey.Py.')
         loop = False
+
+'''classic()
+central()
+bakerloo()
+circle()
+district()
+hammersmithandcity()
+jubilee()
+metropolitan()
+northan()
+piccadilly()
+victoria()
+waterlooandcity()
+overground()
+dlr()
+menu()'''
