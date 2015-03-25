@@ -10,6 +10,9 @@ This program is licenced under the GNU GPL 3.0 Licence.
 The licence should be cloned along with the repo.
 
 tubey.py was developed by OliPicard.
+
++ fixed formatting (https://github.com/OliPicard/tubey.py/pull/1)
+Thanks to Kenneth Love for the heads up and patch code.
 -----------------------------------------------------------------
 '''
 
@@ -28,7 +31,7 @@ root = etree.fromstring(xmldoc)  # parsing xml from text
 PATH_TEMPLATE = '//default/:LineStatus[@ID="{0}"]/'
 
 def classic():
-    for tube_line in root: # grabs all current data feeds. Thanks to reddit user /u/michaelkepler for providing this code.
+    for tube_line in root:  # grabs all current data feeds. Thanks to reddit user /u/michaelkepler for providing this code.
         # line_id = tube_line[1].get('ID')
         line_name = tube_line[1].get('Name')
         line_status = tube_line[2].get('Description')
@@ -37,7 +40,7 @@ def classic():
 
 
 def bakerloo():  # thanks to stranac for explaining xpath to me
-    path = PATH_TEMPLATE.format(0)
+    path = PATH_TEMPLATE.format(0)  # Thanks to Kenneth Love (__love__) for formatting patch.
     namezero = root.xpath(
         path+'default:Line/@Name',
         namespaces={'default': 'http://webservices.lul.co.uk/'}
@@ -166,53 +169,107 @@ def metropolitan():
     print(*statusfive)
 
 def northan():
-    namesix = root.xpath('//default:LineStatus[@ID="5"]/default:Line/@Name', namespaces={'default': 'http://webservices.lul.co.uk/'})
-    espsix = root.xpath('//default:LineStatus[@ID="5"]/default:Status/@Description', namespaces={'default': 'http://webservices.lul.co.uk/'})
-    statussix = root.xpath('//default:LineStatus[@ID="5"]/@StatusDetails', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    namesix = root.xpath(
+        '//default:LineStatus[@ID="5"]/default:Line/@Name',
+        namespaces={'default': 'http://webservices.lul.co.uk/'}
+    )
+    espsix = root.xpath(
+        '//default:LineStatus[@ID="5"]/default:Status/@Description',
+        namespaces={'default': 'http://webservices.lul.co.uk/'}
+    )
+    statussix = root.xpath(
+        '//default:LineStatus[@ID="5"]/@StatusDetails',
+        namespaces={'default': 'http://webservices.lul.co.uk/'}
+    )
     namesix.append('Line')
     print(*namesix)
     print(*espsix, sep='\n')
     print(*statussix)
 
 def piccadilly():
-    nameseven = root.xpath('//default:LineStatus[@ID="6"]/default:Line/@Name', namespaces={'default': 'http://webservices.lul.co.uk/'})
-    espseven = root.xpath('//default:LineStatus[@ID="6"]/default:Status/@Description', namespaces={'default': 'http://webservices.lul.co.uk/'})
-    statusseven = root.xpath('//default:LineStatus[@ID="6"]/@StatusDetails', namespaces={'default': 'http://webservices.lul.co.uk'})
+    nameseven = root.xpath(
+        '//default:LineStatus[@ID="6"]/default:Line/@Name',
+        namespaces={'default': 'http://webservices.lul.co.uk/'}
+    )
+    espseven = root.xpath(
+        '//default:LineStatus[@ID="6"]/default:Status/@Description',
+        namespaces={'default': 'http://webservices.lul.co.uk/'}
+    )
+    statusseven = root.xpath(
+        '//default:LineStatus[@ID="6"]/@StatusDetails',
+        namespaces={'default': 'http://webservices.lul.co.uk'}
+    )
     nameseven.append('Line')
     print(*nameseven)
     print(*espseven, sep='\n')
     print(*statusseven)
 
 def victoria():
-    nameeight = root.xpath('//default:LineStatus[@ID="7"]/default:Line/@Name', namespaces={'default': 'http://webservices.lul.co.uk/'})
-    espeight = root.xpath('//default:LineStatus[@ID="7"]/default:Status/@Description', namespaces={'default': 'http://webservices.lul.co.uk/'})
-    statuseight = root.xpath('//default:LineStatus[@ID="7"]/@StatusDetails', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    nameeight = root.xpath(
+        '//default:LineStatus[@ID="7"]/default:Line/@Name',
+        namespaces={'default': 'http://webservices.lul.co.uk/'}
+    )
+    espeight = root.xpath(
+        '//default:LineStatus[@ID="7"]/default:Status/@Description',
+        namespaces={'default': 'http://webservices.lul.co.uk/'}
+    )
+    statuseight = root.xpath(
+        '//default:LineStatus[@ID="7"]/@StatusDetails',
+        namespaces={'default': 'http://webservices.lul.co.uk/'}
+    )
     nameeight.append('Line')
     print(*nameeight)
     print(*espeight, sep='\n')
     print(*statuseight)
 
 def waterlooandcity():
-    namenine = root.xpath('//default:LineStatus[@ID="8"]/default:Line/@Name', namespaces={'default': 'http://webservices.lul.co.uk/'})
-    espnine = root.xpath('//default:LineStatus[@ID="8"]/default:Status/@Description', namespaces={'default': 'http://webservices.lul.co.uk/'})
-    statusnine = root.xpath('//default:LineStatus[@ID="8"]/@StatusDetails', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    namenine = root.xpath(
+        '//default:LineStatus[@ID="8"]/default:Line/@Name',
+        namespaces={'default': 'http://webservices.lul.co.uk/'}
+    )
+    espnine = root.xpath(
+        '//default:LineStatus[@ID="8"]/default:Status/@Description',
+        namespaces={'default': 'http://webservices.lul.co.uk/'}
+    )
+    statusnine = root.xpath(
+        '//default:LineStatus[@ID="8"]/@StatusDetails',
+        namespaces={'default': 'http://webservices.lul.co.uk/'}
+    )
     namenine.append('Line')
     print(*namenine)
     print(*espnine, sep='\n')
     print(*statusnine)
 
 def overground():
-    nameten = root.xpath('//default:LineStatus[@ID="82"]/default:Line/@Name', namespaces={'default': 'http://webservices.lul.co.uk/'})
-    espten = root.xpath('//default:LineStatus[@ID="82"]/default:Status/@Description', namespaces={'default': 'http://webservices.lul.co.uk/'})
-    statusten = root.xpath('//default:LineStatus[@ID="82"]/@StatusDetails', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    nameten = root.xpath(
+        '//default:LineStatus[@ID="82"]/default:Line/@Name',
+        namespaces={'default': 'http://webservices.lul.co.uk/'}
+    )
+    espten = root.xpath(
+        '//default:LineStatus[@ID="82"]/default:Status/@Description',
+        namespaces={'default': 'http://webservices.lul.co.uk/'}
+    )
+    statusten = root.xpath(
+        '//default:LineStatus[@ID="82"]/@StatusDetails',
+        namespaces={'default': 'http://webservices.lul.co.uk/'}
+    )
     print(*nameten)
     print(*espten, sep='\n')
     print(*statusten)
 
 def dlr():
-    nameeleven = root.xpath('//default:LineStatus[@ID="81"]/default:Line/@Name', namespaces={'default': 'http://webservices.lul.co.uk/'})
-    espeleven = root.xpath('//default:LineStatus[@ID="81"]/default:Status/@Description', namespaces={'default': 'http://webservices.lul.co.uk/'})
-    statuseleven = root.xpath('//default:LineStatus[@ID="81"]/@StatusDetails', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    nameeleven = root.xpath(
+        '//default:LineStatus[@ID="81"]/default:Line/@Name',
+        namespaces={'default': 'http://webservices.lul.co.uk/'}
+    )
+    espeleven = root.xpath(
+        '//default:LineStatus[@ID="81"]/default:Status/@Description',
+        namespaces={'default': 'http://webservices.lul.co.uk/'}
+    )
+    statuseleven = root.xpath(
+        '//default:LineStatus[@ID="81"]/@StatusDetails',
+        namespaces={'default': 'http://webservices.lul.co.uk/'}
+    )
     print(*nameeleven)
     print(*espeleven, sep='\n')
     print(*statuseleven)
@@ -220,7 +277,7 @@ def dlr():
 
 def menu():
     print('-' * 60)
-    print('Welcome to the Tubey.py.\nThis code is operating under the GNU 3.0 licence.\nData feed provided by Transport for London.\nFull Sourcecode at http://github.com/olipicard/tubestatus.py')
+    print('Welcome to the Tubey.py.\nThis code is operating under the GNU GPL 3.0 licence.\nData feed provided by Transport for London.\nFull Sourcecode at http://github.com/olipicard/tubestatus.py')
     print('-' * 60)
     print('1. All Lines (will be slower to request.)')
     print('2. Bakerloo line')
@@ -244,7 +301,7 @@ while loop:
     menu()
     choice=int(input('please enter a number from the menu. '))
     if choice not in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]:
-        print('sorry the number you have picked is invaild. please pick again from the menu. ')
+        print('sorry the number you have picked is invalid. please pick again from the menu. ')
         menu()
         choice=int(input('please enter a number from the menu. '))
     if choice == 1:

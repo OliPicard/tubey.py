@@ -40,7 +40,7 @@ The tubey.Py script is provided under the GNU GPL 3.0 License (Provided inside t
 
 <h2>credits</h2>
 Many Thanks to the wonderful people over at /r/learnpython.
-a massive Thanks to __love__ for providing me information on how to return variables, Without your help this project wouldn't have gotten off the ground.
+a massive Thanks to __love__ for providing me information on how to return variables, Without your help this project wouldn't have gotten off the ground. In addition thanks to Kenneth Love for helping with formatting the code patch (https://github.com/OliPicard/tubey.py/pull/1)
 
 a massive thank you to /u/michaelkepler for providing a basic syntax to use with etree and integrate the requests module for handling XML files.
 
