@@ -25,31 +25,50 @@ xmldoc = resp.text  # saving the response as text (requests cannot handle xml)
 
 root = etree.fromstring(xmldoc)  # parsing xml from text
 
+PATH_TEMPLATE = '//default/:LineStatus[@ID="{0}"]/'
+
 def classic():
-
     for tube_line in root: # grabs all current data feeds. Thanks to reddit user /u/michaelkepler for providing this code.
-      # line_id = tube_line[1].get('ID')
-      line_name = tube_line[1].get('Name')
-      line_status = tube_line[2].get('Description')
-      status_details = tube_line.get('StatusDetails')
-      print(line_name, line_status, status_details)
-
-
+        # line_id = tube_line[1].get('ID')
+        line_name = tube_line[1].get('Name')
+        line_status = tube_line[2].get('Description')
+        status_details = tube_line.get('StatusDetails')
+        print(line_name, line_status, status_details)
 
 
 def bakerloo():  # thanks to stranac for explaining xpath to me
-    namezero = root.xpath('//default:LineStatus[@ID="0"]/default:Line/@Name', namespaces={'default': 'http://webservices.lul.co.uk/'})
-    espzero = root.xpath('//default:LineStatus[@ID="0"]/default:Status/@Description', namespaces={'default': 'http://webservices.lul.co.uk/'})
-    statuszero = root.xpath('//default:LineStatus[@ID="0"]/@StatusDetails', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    path = PATH_TEMPLATE.format(0)
+    namezero = root.xpath(
+        path+'default:Line/@Name',
+        namespaces={'default': 'http://webservices.lul.co.uk/'}
+    )
+    espzero = root.xpath(
+        path+'default:Status/@Description',
+        namespaces={'default': 'http://webservices.lul.co.uk/'}
+    )
+    statuszero = root.xpath(
+        path+'@StatusDetails',
+        namespaces={'default': 'http://webservices.lul.co.uk/'}
+    )
     namezero.append('Line')
     print(*namezero)
     print(*espzero, sep='\n')
     print(*statuszero)
 
+
 def central():
-    nameone = root.xpath('//default:LineStatus[@ID="1"]/default:Line/@Name', namespaces={'default': 'http://webservices.lul.co.uk/'})
-    espone = root.xpath('//default:LineStatus[@ID="1"]/default:Status/@Description', namespaces={'default': 'http://webservices.lul.co.uk/'})
-    statusone = root.xpath('//default:LineStatus[@ID="1"]/@StatusDetails', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    nameone = root.xpath(
+        '//default:LineStatus[@ID="1"]/default:Line/@Name',
+        namespaces={'default': 'http://webservices.lul.co.uk/'}
+    )
+    espone = root.xpath(
+        '//default:LineStatus[@ID="1"]/default:Status/@Description',
+        namespaces={'default': 'http://webservices.lul.co.uk/'}
+    )
+    statusone = root.xpath(
+        '//default:LineStatus[@ID="1"]/@StatusDetails',
+        namespaces={'default': 'http://webservices.lul.co.uk/'}
+    )
     nameone.append('Line')
     print(*nameone)
     print(*espone, sep='\n')
@@ -57,45 +76,90 @@ def central():
 
 
 def circle():
-    nameten = root.xpath('//default:LineStatus[@ID="10"]/default:Line/@Name', namespaces={'default': 'http://webservices.lul.co.uk/'})
-    esp = root.xpath('//default:LineStatus[@ID="10"]/default:Status/@Description', namespaces={'default': 'http://webservices.lul.co.uk/'})
-    statusten = root.xpath('//default:LineStatus[@ID="10"]/@StatusDetails', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    nameten = root.xpath(
+        '//default:LineStatus[@ID="10"]/default:Line/@Name',
+        namespaces={'default': 'http://webservices.lul.co.uk/'}
+    )
+    esp = root.xpath(
+        '//default:LineStatus[@ID="10"]/default:Status/@Description',
+        namespaces={'default': 'http://webservices.lul.co.uk/'}
+    )
+    statusten = root.xpath(
+        '//default:LineStatus[@ID="10"]/@StatusDetails',
+        namespaces={'default': 'http://webservices.lul.co.uk/'}
+    )
     nameten.append('Line')
     print(*nameten)
     print(*esp, sep='\n')
     print(*statusten, sep='\n')
 
 def district():
-    nametwo = root.xpath('//default:LineStatus[@ID="2"]/default:Line/@Name', namespaces={'default': 'http://webservices.lul.co.uk/'})
-    esptwo = root.xpath('//default:LineStatus[@ID="2"]/default:Status/@Description', namespaces={'default': 'http://webservices.lul.co.uk/'})
-    statustwo = root.xpath('//default:LineStatus[@ID="2"]/@StatusDetails', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    nametwo = root.xpath(
+        '//default:LineStatus[@ID="2"]/default:Line/@Name',
+        namespaces={'default': 'http://webservices.lul.co.uk/'}
+    )
+    esptwo = root.xpath(
+        '//default:LineStatus[@ID="2"]/default:Status/@Description',
+        namespaces={'default': 'http://webservices.lul.co.uk/'}
+    )
+    statustwo = root.xpath(
+        '//default:LineStatus[@ID="2"]/@StatusDetails',
+        namespaces={'default': 'http://webservices.lul.co.uk/'}
+    )
     nametwo.append('Line')
     print(*nametwo)
     print(*esptwo, sep='\n')
     print(*statustwo)
 
 def hammersmithandcity():
-    namethree = root.xpath('//default:LineStatus[@ID="8"]/default:Line/@Name', namespaces={'default': 'http://webservices.lul.co.uk/'})
-    espthree = root.xpath('//default:LineStatus[@ID="8"]/default:Status/@Description', namespaces={'default': 'http://webservices.lul.co.uk/'})
-    statusthree = root.xpath('//default:LineStatus[@ID="8"]/@StatusDetails', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    namethree = root.xpath(
+        '//default:LineStatus[@ID="8"]/default:Line/@Name',
+        namespaces={'default': 'http://webservices.lul.co.uk/'}
+    )
+    espthree = root.xpath(
+        '//default:LineStatus[@ID="8"]/default:Status/@Description',
+        namespaces={'default': 'http://webservices.lul.co.uk/'}
+    )
+    statusthree = root.xpath(
+        '//default:LineStatus[@ID="8"]/@StatusDetails',
+        namespaces={'default': 'http://webservices.lul.co.uk/'}
+    )
     namethree.append('Line')
     print(*namethree)
     print(*espthree, sep='\n')
     print(*statusthree)
 
 def jubilee():
-    namefour = root.xpath('//default:LineStatus[@ID="4"]/default:Line/@Name', namespaces={'default': 'http://webservices.lul.co.uk/'})
-    espfour = root.xpath('//default:LineStatus[@ID="4"]/default:Status/@Description', namespaces={'default': 'http://webservices.lul.co.uk/'})
-    statusfour = root.xpath('//default:LineStatus[@ID="4"]/@StatusDetails', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    namefour = root.xpath(
+        '//default:LineStatus[@ID="4"]/default:Line/@Name',
+        namespaces={'default': 'http://webservices.lul.co.uk/'}
+    )
+    espfour = root.xpath(
+        '//default:LineStatus[@ID="4"]/default:Status/@Description',
+        namespaces={'default': 'http://webservices.lul.co.uk/'}
+    )
+    statusfour = root.xpath(
+        '//default:LineStatus[@ID="4"]/@StatusDetails',
+        namespaces={'default': 'http://webservices.lul.co.uk/'}
+    )
     namefour.append('Line')
     print(*namefour)
     print(*espfour, sep='\n')
     print(*statusfour)
 
 def metropolitan():
-    namefive = root.xpath('//default:LineStatus[@ID="9"]/default:Line/@Name',  namespaces={'default': 'http://webservices.lul.co.uk/'})
-    espfive = root.xpath('//default:LineStatus[@ID="9"]/default:Status/@Description', namespaces={'default': 'http://webservices.lul.co.uk/'})
-    statusfive = root.xpath('//default:LineStatus[@ID="9"]/@StatusDetails', namespaces={'default': 'http://webservices.lul.co.uk/'})
+    namefive = root.xpath(
+        '//default:LineStatus[@ID="9"]/default:Line/@Name',
+        namespaces={'default': 'http://webservices.lul.co.uk/'}
+    )
+    espfive = root.xpath(
+        '//default:LineStatus[@ID="9"]/default:Status/@Description',
+        namespaces={'default': 'http://webservices.lul.co.uk/'}
+    )
+    statusfive = root.xpath(
+        '//default:LineStatus[@ID="9"]/@StatusDetails',
+        namespaces={'default': 'http://webservices.lul.co.uk/'}
+    )
     namefive.append('Line')
     print(*namefive)
     print(*espfive, sep='\n')
