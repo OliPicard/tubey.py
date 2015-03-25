@@ -40,17 +40,16 @@ def classic():
 
 
 def bakerloo():  # thanks to stranac for explaining xpath to me
-    path = PATH_TEMPLATE.format(0)  # Thanks to Kenneth Love (__love__) for formatting patch.
-    namezero = root.xpath(
-        path+'default:Line/@Name',
+    namezero = root.xpath(  # Thanks to Kenneth Love (__love__) for formatting patch.
+        '//default:LineStatus[@ID="0"]/@StatusDetails',
         namespaces={'default': 'http://webservices.lul.co.uk/'}
     )
     espzero = root.xpath(
-        path+'default:Status/@Description',
+        '//default:LineStatus[@ID="1"]/default:Status/@Description',
         namespaces={'default': 'http://webservices.lul.co.uk/'}
     )
     statuszero = root.xpath(
-        path+'@StatusDetails',
+        '//default:LineStatus[@ID="1"]/@StatusDetails',
         namespaces={'default': 'http://webservices.lul.co.uk/'}
     )
     namezero.append('Line')
