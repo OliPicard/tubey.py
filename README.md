@@ -1,7 +1,7 @@
 <h1>tubey.Py</h1>
-tubey.py provides the latest line status by pulling data directly from Transport For London's Cloud API. The module requires no 3rd party resources and is very portable.
+tubey.py provides the latest line status by pulling data directly from Transport For London's Cloud API.
 
-tubey.Py was built as a project for understanding how to program applications with XML apis.
+The idea of the project is an attempt to understand XML data structures as well as understanding how to program simple applications using XML API endpoints.
 
 <h2> Installation </h2>
 You will need...
