@@ -28,7 +28,6 @@ xmldoc = resp.text  # saving the response as text (requests cannot handle xml)
 
 root = etree.fromstring(xmldoc)  # parsing xml from text
 
-PATH_TEMPLATE = '//default/:LineStatus[@ID="{0}"]/'
 
 def classic():
     for tube_line in root:  # grabs all current data feeds. Thanks to reddit user /u/michaelkepler for providing this code.
@@ -41,15 +40,15 @@ def classic():
 
 def bakerloo():  # thanks to stranac for explaining xpath to me
     namezero = root.xpath(  # Thanks to Kenneth Love (__love__) for formatting patch.
-        '//default:LineStatus[@ID="0"]/@StatusDetails',
+        '//default:LineStatus[@ID="0"]/default:Line/@Name',
         namespaces={'default': 'http://webservices.lul.co.uk/'}
     )
     espzero = root.xpath(
-        '//default:LineStatus[@ID="1"]/default:Status/@Description',
+        '//default:LineStatus[@ID="0"]/default:Status/@Description',
         namespaces={'default': 'http://webservices.lul.co.uk/'}
     )
     statuszero = root.xpath(
-        '//default:LineStatus[@ID="1"]/@StatusDetails',
+        '//default:LineStatus[@ID="0"]/@StatusDetails',
         namespaces={'default': 'http://webservices.lul.co.uk/'}
     )
     namezero.append('Line')
