@@ -226,15 +226,15 @@ def victoria():
 
 def waterlooandcity():
     namenine = root.xpath(
-        '//default:LineStatus[@ID="8"]/default:Line/@Name',
+        '//default:LineStatus[@ID="11"]/default:Line/@Name',
         namespaces={'default': 'http://webservices.lul.co.uk/'}
     )
     espnine = root.xpath(
-        '//default:LineStatus[@ID="8"]/default:Status/@Description',
+        '//default:LineStatus[@ID="11"]/default:Status/@Description',
         namespaces={'default': 'http://webservices.lul.co.uk/'}
     )
     statusnine = root.xpath(
-        '//default:LineStatus[@ID="8"]/@StatusDetails',
+        '//default:LineStatus[@ID="11"]/@StatusDetails',
         namespaces={'default': 'http://webservices.lul.co.uk/'}
     )
     namenine.append('Line')
@@ -281,8 +281,7 @@ def menu():
     print('-' * 60)
     print('Welcome to the Tubey.py.\nThis code is operating under the GNU GPL 3.0 licence.'
           '\nData feed provided by Transport for London.\n'
-          'Full Sourcecode at http://github.com/olipicard/tubestatus.py'
-    )
+          'Full Sourcecode at http://github.com/olipicard/tubestatus.py')
     print('For a full list of commands type \'help\'')
     print('-' * 60)
 loop = True
@@ -301,7 +300,7 @@ while loop:
     if words == ['h', 'e', 'l', 'p']:
         print('The following commands can be used.')
         print('-'*60)
-        print('all lines')
+        print('all')
         print('circle')
         print('central')
         print('bakerloo')
@@ -314,6 +313,7 @@ while loop:
         print('waterlooandcity')
         print('overground')
         print('dlr')
+        print('quit')
         escape = input('press any key to return back to the main menu.')
     if words == ['c', 'i', 'r', 'c', 'l', 'e']:
         circle()
@@ -356,14 +356,20 @@ while loop:
     if words == ['H', 'a', 'm', 'm', 'e', 'r', 's', 'm', 'i', 't', 'h', 'a', 'n', 'd', 'C', 'i', 't', 'y']:
         hammersmithandcity()
         escape = input('press any key to return back to the main menu.')
-    if words == ['j', 'u', 'b', 'i', 'l', 'i', 'e', 'e']:
+    if words == ['j', 'u', 'b', 'i', 'l', 'e', 'e']:
         jubilee()
     if words == ['J', 'u', 'b', 'i', 'l', 'i', 'e', 'e']:
         jubilee()
         escape = input('press any key to return back to the main menu.')
-    if words == ['J', 'U', 'I', 'L', 'I', 'E', 'E']:
+    if words == ['J', 'U', 'B', 'I', 'L', 'I', 'E', 'E']:
         jubilee()
         escape = input('press any key to return back to the main menu.')
+    if words == ['v', 'i', 'c', 't', 'o', 'r', 'i', 'a']:
+        victoria()
+    if words == ['V', 'i', 'c', 't', 'o', 'r', 'i', 'a']:
+        victoria()
+    if words == ['V', 'I', 'C', 'T', 'O', 'R', 'I', 'A']:
+        victoria()
     if words == ['m', 'e', 't', 'r', 'o', 'p', 'o', 'l', 'i', 't', 'a', 'n']:
         metropolitan()
         escape = input('press any key to return back to the main menu.')
@@ -400,7 +406,7 @@ while loop:
     if words == ['p', 'i', 'c']:
         piccadilly()
         escape = input('press any key to return back to the main menu.')
-    if words == ['w', 'a', 't', 'e', 'r', 'l', 'o', 'o', 'a', 'n', 'd', 'c', 'i','t', 'y']:
+    if words == ['w', 'a', 't', 'e', 'r', 'l', 'o', 'o', 'a', 'n', 'd', 'c', 'i', 't', 'y']:
         waterlooandcity()
         escape = input('press any key to return back to the main menu.')
     if words == ['W', 'a', 't', 'e', 'r', 'l', 'o', 'o', 'a', 'n', 'd', 'C', 'i', 't', 'y']:
@@ -441,6 +447,8 @@ while loop:
         hammersmithandcity()
         metropolitan()
         northan()
+        piccadilly()
+        victoria()
         jubilee()
         dlr()
         overground()
@@ -448,17 +456,491 @@ while loop:
     if words == ['c', 'l', 'a', 's', 's', 'i', 'c']:
         classic()
         escape = input('press any key to return back to the main menu.')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    # merging words, wish me luck!
+    if words == ['d', 'l', 'r', 'o', 'v', 'e', 'r', 'g', 'r', 'o', 'u', 'n', 'd']:
+        dlr()
+        overground()
+    if words == ['d', 'l', 'r', 'v', 'i', 'c', 't', 'o', 'r', 'i', 'a']:
+        dlr()
+        victoria()
+    if words == ['d', 'l', 'r', 'w', 'a', 't', 'e', 'r', 'l', 'o', 'o', 'a', 'n', 'd', 'c', 'i', 't', 'y']:
+        dlr()
+        waterlooandcity()
+    if words == ['d', 'l', 'r', 'p', 'i', 'c', 'c', 'a', 'd', 'i', 'l', 'l', 'y']:
+        dlr()
+        piccadilly()
+    if words == ['d', 'l', 'r', 'c', 'i', 'r', 'c', 'l', 'e']:
+        dlr()
+        circle()
+    if words == ['d', 'l', 'r', 'c', 'e', 'n', 't', 'r', 'a', 'l']:
+        dlr()
+        central()
+    if words == ['d', 'l', 'r', 'b', 'a', 'k', 'e', 'r', 'l', 'o', 'o']:
+        dlr()
+        bakerloo()
+    if words == ['d', 'l', 'r', 'd', 'i', 's', 't', 'r', 'i', 'c', 't']:
+        dlr()
+        district()
+    if words == ['d', 'l', 'r',
+                 'h', 'a', 'm', 'm', 'e', 'r', 's', 'm', 'i', 't', 'h', 'a', 'n', 'd', 'c', 'i', 't', 'y']:
+        dlr()
+        hammersmithandcity()
+    if words == ['d', 'l', 'r', 'j', 'u', 'b', 'i', 'l', 'e' 'e']:
+        dlr()
+        jubilee()
+    if words == ['d', 'l', 'r', 'm', 'e', 't', 'r', 'o', 'p', 'o', 'l', 'i', 't', 'a', 'n']:
+        dlr()
+        metropolitan()
+    if words == ['d', 'l', 'r', 'n', 'o', 'r', 't', 'h', 'a', 'n']:
+        dlr()
+        northan()
+    if words == ['c', 'i', 'r', 'c', 'l', 'e',
+                 'c', 'e', 'n', 't', 'r', 'a', 'l']:
+        circle()
+        central()
+    if words == ['c', 'i', 'r', 'c', 'l', 'e',
+                 'o', 'v', 'e', 'r', 'g', 'r', 'o', 'u', 'n', 'd']:
+        circle()
+        overground()
+    if words == ['c', 'i', 'r', 'c', 'l', 'e',
+                 'p', 'i', 'c', 'c', 'a', 'd', 'i', 'l', 'l', 'y']:
+        circle()
+        piccadilly()
+    if words == ['c', 'i', 'r', 'c', 'l', 'e',
+                 'b', 'a', 'k', 'e', 'r', 'l', 'o', 'o']:
+        circle()
+        bakerloo()
+    if words == ['c', 'i', 'r', 'c', 'l', 'e',
+                 'd', 'i', 's', 't', 'r', 'i', 'c', 't']:
+        circle()
+        district()
+    if words == ['c', 'i', 'r', 'c', 'l', 'e',
+                 'h', 'a', 'm', 'm', 'e', 'r', 's', 'm', 'i', 't', 'h', 'a', 'n', 'd', 'c', 'i', 't', 'y']:
+        circle()
+        hammersmithandcity()
+    if words == ['c', 'i', 'r', 'c', 'l', 'e',
+                 'w', 'a', 't', 'e', 'r', 'l', 'o', 'o', 'a', 'n', 'd', 'c', 'i', 't', 'y']:
+        circle()
+        waterlooandcity()
+    if words == ['c', 'i', 'r', 'c', 'l', 'e',
+                 'j', 'u', 'b', 'i', 'l', 'e' 'e']:
+        circle()
+        jubilee()
+    if words == ['c', 'i', 'r', 'c', 'l', 'e', 'n', 'o', 'r', 't', 'h', 'a', 'n']:
+        circle()
+        northan()
+    if words == ['c', 'i', 'r', 'c', 'l', 'e',
+                 'd', 'l', 'r']:
+        circle()
+        dlr()
+    if words == ['c', 'i', 'r', 'c', 'l', 'e',
+                 'v', 'i', 'c', 't', 'o', 'r', 'i', 'a']:
+        circle()
+        victoria()
+    if words == ['c', 'i', 'r', 'c', 'l', 'e',
+                 'm', 'e', 't', 'r', 'o', 'p', 'o', 'l', 'i', 't', 'a', 'n']:
+        circle()
+        metropolitan()
+    if words == ['c', 'e', 'n', 't', 'r', 'a', 'l',
+                 'o', 'v', 'e', 'r', 'g', 'r', 'o', 'u', 'n', 'd']:
+        central()
+        overground()
+    if words == ['c', 'e', 'n', 't', 'r', 'a', 'l',
+                 'c', 'i', 'r', 'c', 'l', 'e']:
+        central()
+        circle()
+    if words == ['c', 'e', 'n', 't', 'r', 'a', 'l',
+                 'b', 'a', 'k', 'e', 'r', 'l', 'o', 'o']:
+        central()
+        bakerloo()
+    if words == ['c', 'e', 'n', 't', 'r', 'a', 'l',
+                 'd', 'i', 's', 't', 'r', 'i', 'c', 't']:
+        central()
+        district()
+    if words == ['c', 'e', 'n', 't', 'r', 'a', 'l',
+                 'h', 'a', 'm', 'm', 'e', 'r', 's', 'm', 'i', 't', 'h', 'a', 'n', 'd', 'c', 'i', 't', 'y']:
+        central()
+        hammersmithandcity()
+    if words == ['c', 'e', 'n', 't', 'r', 'a', 'l',
+                 'j', 'u', 'b', 'i', 'l', 'e' 'e']:
+        central()
+        jubilee()
+    if words == ['c', 'e', 'n', 't', 'r', 'a', 'l',
+                 'n', 'o', 'r', 't', 'h', 'a', 'n']:
+        central()
+        northan()
+    if words == ['c', 'e', 'n', 't', 'r', 'a', 'l', 'm', 'e', 't', 'r', 'o', 'p', 'o', 'l', 'i', 't', 'a', 'n']:
+        central()
+        metropolitan()
+    if words == ['c', 'e', 'n', 't', 'r', 'a', 'l',
+                 'v', 'i', 'c', 't', 'o', 'r', 'i', 'a']:
+        central()
+        victoria()
+    if words == ['c', 'e', 'n', 't', 'r', 'a', 'l',
+                 'p', 'i', 'c', 'c', 'a', 'd', 'i', 'l', 'l', 'y']:
+        central()
+        piccadilly()
+    if words == ['c', 'e', 'n', 't', 'r', 'a', 'l',
+                 'd', 'l', 'r']:
+        central()
+        dlr()
+    if words == ['c', 'e', 'n', 't', 'r', 'a', 'l',
+                 'w', 'a', 't', 'e', 'r', 'l', 'o', 'o', 'a', 'n', 'd', 'c', 'i', 't', 'y']:
+        central()
+        waterlooandcity()
+    if words == ['c', 'e', 'n', 't', 'r', 'a', 'l', 'c', 'i', 't', 'y']:
+        central()
+        waterlooandcity()
+    if words == ['c', 'e', 'n', 't', 'r', 'a', 'l', 'w', 'a', 't', 'e', 'r', 'l', 'o', 'o']:
+        central()
+        waterlooandcity()
+    if words == ['b', 'a', 'k', 'e', 'r', 'l', 'o', 'o', 'c', 'e', 'n', 't', 'r', 'a', 'l']:
+        bakerloo()
+        central()
+    if words == ['b', 'a', 'k', 'e', 'r', 'l', 'o', 'o',
+                 'c', 'i', 'r', 'c', 'l', 'e']:
+        bakerloo()
+        circle()
+    if words == ['b', 'a', 'k', 'e', 'r', 'l', 'o', 'o',
+                 'd', 'i', 's', 't', 'r', 'i', 'c', 't']:
+        bakerloo()
+        district()
+    if words == ['b', 'a', 'k', 'e', 'r', 'l', 'o', 'o',
+                 'h', 'a', 'm', 'm', 'e', 'r', 's', 'm', 'i', 't', 'h', 'a', 'n', 'd', 'c', 'i', 't', 'y']:
+        bakerloo()
+        hammersmithandcity()
+    if words == ['b', 'a', 'k', 'e', 'r', 'l', 'o', 'o',
+                 'j', 'u', 'b', 'i', 'l', 'e', 'e']:
+        bakerloo()
+        jubilee()
+    if words == ['b', 'a', 'k', 'e', 'r', 'l', 'o', 'o',
+                 'm', 'e', 't', 'r', 'o', 'p', 'o', 'l', 'i', 't', 'a', 'n']:
+        bakerloo()
+        metropolitan()
+    if words == ['b', 'a', 'k', 'e', 'r', 'l', 'o', 'o',
+                 'n', 'o', 'r', 't', 'h', 'a', 'n']:
+        bakerloo()
+        northan()
+    if words == ['b', 'a', 'k', 'e', 'r', 'l', 'o', 'o',
+                 'p', 'i', 'c', 'c', 'a', 'd', 'i', 'l', 'l', 'y']:
+        bakerloo()
+        piccadilly()
+    if words == ['b', 'a', 'k', 'e', 'r', 'l', 'o', 'o',
+                 'v', 'i', 'c', 't', 'o', 'r', 'i', 'a']:
+        bakerloo()
+        victoria()
+    if words == ['b', 'a', 'k', 'e', 'r', 'l', 'o', 'o',
+                 'w', 'a', 't', 'e', 'r', 'l', 'o', 'o']:
+        bakerloo()
+        waterlooandcity()
+    if words == ['b', 'a', 'k', 'e', 'r', 'l', 'o', 'o',
+                 'w', 'a', 't', 'e', 'r', 'l', 'o', 'o', 'a', 'n', 'd', 'c', 'i', 't', 'y']:
+        bakerloo()
+        waterlooandcity()
+    if words == ['b', 'a', 'k', 'e', 'r', 'l', 'o', 'o', 'o', 'v', 'e', 'r', 'g', 'r', 'o', 'u', 'n', 'd']:
+        bakerloo()
+        overground()
+    if words == ['b', 'a', 'k', 'e', 'r', 'l', 'o', 'o', 'd', 'l', 'r']:
+        bakerloo()
+        dlr()
+    if words == ['d', 'i', 's', 't', 'r', 'i', 'c', 't', 'b', 'a', 'k', 'e', 'r', 'l', 'o', 'o']:
+        district()
+        bakerloo()
+    if words == ['d', 'i', 's', 't', 'r', 'i', 'c', 't', 'c', 'e', 'n', 't', 'r', 'a', 'l']:
+        district()
+        central()
+    if words == ['d', 'i', 's', 't', 'r', 'i', 'c', 't', 'c', 'i', 'r', 'c', 'l', 'e']:
+        district()
+        circle()
+    if words == ['d', 'i', 's', 't', 'r', 'i', 'c', 't',
+                 'h', 'a', 'm', 'm', 'e', 'r', 's', 'm', 'i', 't', 'h', 'a', 'n', 'd', 'c', 'i', 't', 'y']:
+        district()
+        hammersmithandcity()
+    if words == ['d', 'i', 's', 't', 'r', 'i', 'c', 't', 'h', 'a', 'm', 'm', 'e', 'r', 's', 'm', 'i', 't', 'h']:
+        district()
+        hammersmithandcity()
+    if words == ['d', 'i', 's', 't', 'r', 'i', 'c', 't', 'j', 'u', 'b', 'i', 'l', 'e', 'e']:
+        district()
+        jubilee()
+    if words == ['d', 'i', 's', 't', 'r', 'i', 'c', 't', 'm', 'e', 't', 'r', 'o', 'p', 'o', 'l', 'i', 't', 'a', 'n']:
+        district()
+        metropolitan()
+    if words == ['d', 'i', 's', 't', 'r', 'i', 'c', 't',
+                 'n', 'o', 'r', 't', 'h', 'a', 'n']:
+        district()
+        northan()
+    if words == ['d', 'i', 's', 't', 'r', 'i', 'c', 't',
+                 'p', 'i', 'c', 'c', 'a', 'd', 'i', 'l', 'l', 'y']:
+        district()
+        piccadilly()
+    if words == ['d', 'i', 's', 't', 'r', 'i', 'c', 't',
+                 'v', 'i', 'c', 't', 'o', 'r', 'i', 'a']:
+        district()
+        victoria()
+    if words == ['d', 'i', 's', 't', 'r', 'i', 'c', 't',
+                 'w', 'a', 't', 'e', 'r', 'l', 'o', 'o', 'a', 'n', 'd', 'c', 'i', 't', 'y']:
+        district()
+        waterlooandcity()
+    if words == ['d', 'i', 's', 't', 'r', 'i', 'c', 't', 'w', 'a', 't', 'e', 'r', 'l', 'o', 'o']:
+        waterlooandcity()
+    if words == ['d', 'i', 's', 't', 'r', 'i', 'c', 't', 'o', 'v', 'e', 'r', 'g', 'r', 'o', 'u', 'n', 'd']:
+        district()
+        overground()
+    if words == ['d', 'i', 's', 't', 'r', 'i', 'c', 't', 'd', 'l', 'r']:
+        district()
+        dlr()
+    if words == ['h', 'a', 'm', 'm', 'e', 'r', 's', 'm', 'i', 't', 'h', 'a', 'n', 'd', 'c', 'i', 't', 'y'
+                 'b', 'a', 'k', 'e', 'r', 'l', 'o', 'o']:
+        hammersmithandcity()
+        bakerloo()
+    if words == ['h', 'a', 'm', 'm', 'e', 'r', 's', 'm', 'i', 't', 'h', 'a', 'n', 'd', 'c', 'i', 't', 'y',
+                 'c', 'e', 'n', 't', 'r', 'a', 'l']:
+        hammersmithandcity()
+        central()
+    if words == ['h', 'a', 'm', 'm', 'e', 'r', 's', 'm', 'i', 't', 'h', 'a', 'n', 'd', 'c', 'i', 't', 'y',
+                 'j', 'u', 'b', 'i', 'l', 'e', 'e']:
+        hammersmithandcity()
+        jubilee()
+    if words == ['h', 'a', 'm', 'm', 'e', 'r', 's', 'm', 'i', 't', 'h', 'a', 'n', 'd', 'c', 'i', 't', 'y'
+                 'm', 'e', 't', 'r', 'o', 'p', 'o', 'l', 'i', 't', 'a', 'n']:
+        hammersmithandcity()
+        metropolitan()
+    if words == ['h', 'a', 'm', 'm', 'e', 'r', 's', 'm', 'i', 't', 'h', 'a', 'n', 'd', 'c', 'i', 't', 'y',
+                 'n', 'o', 'r', 't', 'h', 'a', 'n']:
+        hammersmithandcity()
+        northan()
+    if words == ['h', 'a', 'm', 'm', 'e', 'r', 's', 'm', 'i', 't', 'h', 'a', 'n', 'd', 'c', 'i', 't', 'y',
+                 'p', 'i', 'c', 'c', 'a', 'd', 'i', 'l', 'l', 'y']:
+        hammersmithandcity()
+        piccadilly()
+    if words == ['h', 'a', 'm', 'm', 'e', 'r', 's', 'm', 'i', 't', 'h', 'a', 'n', 'd', 'c', 'i', 't', 'y',
+                 'v', 'i', 'c', 't', 'o', 'r', 'i', 'a']:
+        hammersmithandcity()
+        victoria()
+    if words == ['h', 'a', 'm', 'm', 'e', 'r', 's', 'm', 'i', 't', 'h', 'a', 'n', 'd', 'c', 'i', 't', 'y',
+                 'o', 'v', 'e', 'r', 'g', 'r', 'o', 'u', 'n', 'd']:
+        hammersmithandcity()
+        overground()
+    if words == ['h', 'a', 'm', 'm', 'e', 'r', 's', 'm', 'i', 't', 'h', 'a', 'n', 'd', 'c', 'i', 't', 'y',
+                 'd', 'l', 'r']:
+        hammersmithandcity()
+        dlr()
+    if words == ['j', 'u', 'b', 'i', 'l', 'e', 'e',
+                 'b', 'a', 'k', 'e', 'r', 'l', 'o', 'o']:
+        jubilee()
+        bakerloo()
+    if words == ['j', 'u', 'b', 'i', 'l', 'e', 'e', 'c', 'e', 'n', 't', 'r', 'a', 'l']:
+        jubilee()
+        central()
+    if words == ['j', 'u', 'b', 'i', 'l', 'e', 'e',
+                 'c', 'i', 'r', 'c', 'l', 'e']:
+        jubilee()
+        circle()
+    if words == ['j', 'u', 'b', 'i', 'l', 'e', 'e',
+                 'm', 'e', 't', 'r', 'o', 'p', 'o', 'l', 'i', 't', 'a', 'n']:
+        jubilee()
+        metropolitan()
+    if words == ['j', 'u', 'b', 'i', 'l', 'e', 'e',
+                 'n', 'o', 'r', 't', 'h', 'a', 'n']:
+        jubilee()
+        northan()
+    if words == ['j', 'u', 'b', 'i', 'l', 'e', 'e',
+                 'm', 'e', 't', 'r', 'o', 'p', 'l', 'i', 't', 'a', 'n']:
+        jubilee()
+        metropolitan()
+    if words == ['j', 'u', 'b', 'i', 'l', 'e', 'e',
+                 'p', 'i', 'c', 'c', 'a', 'd', 'i', 'l', 'l', 'y']:
+        jubilee()
+        piccadilly()
+    if words == ['j', 'u', 'b', 'i', 'l', 'e', 'e',
+                 'v', 'i', 'c', 't', 'o', 'r', 'i', 'a']:
+        jubilee()
+        victoria()
+    if words == ['j', 'u', 'b', 'i', 'l', 'e', 'e',
+                 'w', 'a', 't', 'e', 'r', 'l', 'o', 'o', 'a', 'n', 'd', 'c', 'i', 't', 'y']:
+        jubilee()
+        waterlooandcity()
+    if words == ['j', 'u', 'b', 'i', 'l', 'e', 'e',
+                 'o', 'v', 'e', 'r', 'g', 'r', 'o', 'u', 'n', 'd']:
+        jubilee()
+        overground()
+    if words == ['j', 'u', 'b', 'i', 'l', 'e', 'e',
+                 'd', 'l', 'r']:
+        jubilee()
+        dlr()
+    if words == ['m', 'e', 't', 'r', 'o', 'p', 'o', 'l', 'i', 't', 'a', 'n',
+                 'b', 'a', 'k', 'e', 'r', 'l', 'o', 'o']:
+        metropolitan()
+        bakerloo()
+    if words == ['m', 'e', 't', 'r', 'o', 'p', 'o', 'l', 'i', 't', 'a', 'n',
+                 'c', 'e', 'n', 't', 'r', 'a', 'l']:
+        metropolitan()
+        central()
+    if words == ['m', 'e', 't', 'r', 'o', 'p', 'o', 'l', 'i', 't', 'a', 'n',
+                 'c', 'i', 'r', 'c', 'l', 'e']:
+        metropolitan()
+        circle()
+    if words == ['m', 'e', 't', 'r', 'o', 'p', 'o', 'l', 'i', 't', 'a', 'n',
+                 'd', 'i', 's', 't', 'r', 'i', 'c', 't']:
+        metropolitan()
+        district()
+    if words == ['m', 'e', 't', 'r', 'o', 'p', 'o', 'l', 'i', 't', 'a', 'n',
+                 'h', 'a', 'm', 'm', 'e', 'r', 's', 'm', 'i', 't', 'h', 'a', 'n', 'd', 'c', 'i', 't', 'y']:
+        metropolitan()
+        hammersmithandcity()
+    if words == ['m', 'e', 't', 'r', 'o', 'p', 'o', 'l', 'i', 't', 'a', 'n',
+                 'h', 'a', 'm', 'm', 'e', 'r', 's', 'm', 'i', 't', 'h']:
+        metropolitan()
+        hammersmithandcity()
+    if words == ['m', 'e', 't', 'r', 'o', 'p', 'o', 'l', 'i', 't', 'a', 'n',
+                 'j', 'u', 'b', 'i', 'l', 'e', 'e']:
+        metropolitan()
+        jubilee()
+    if words == ['m', 'e', 't', 'r', 'o', 'p', 'o', 'l', 'i', 't', 'a', 'n',
+                 'n', 'o', 'r', 't', 'h', 'a', 'n']:
+        metropolitan()
+        northan()
+    if words == ['m', 'e', 't', 'r', 'o', 'p', 'o', 'l', 'i', 't', 'a', 'n',
+                 'p', 'i', 'c', 'c', 'a', 'd', 'i', 'l', 'l', 'y']:
+        metropolitan()
+        piccadilly()
+    if words == ['m', 'e', 't', 'r', 'o', 'p', 'o', 'l', 'i', 't', 'a', 'n',
+                 'n', 'o', 'r', 't', 'h', 'a', 'n']:
+        metropolitan()
+        northan()
+    if words == ['m', 'e', 't', 'r', 'o', 'p', 'o', 'l', 'i', 't', 'a', 'n',
+                 'v', 'i', 'c', 't', 'o', 'r', 'i', 'a']:
+        metropolitan()
+        victoria()
+    if words == ['m', 'e', 't', 'r', 'o', 'p', 'o', 'l', 'i', 't', 'a', 'n',
+                 'w', 'a', 't', 'e', 'r', 'l', 'o', 'o', 'a', 'n', 'd', 'c', 'i', 't', 'y']:
+        metropolitan()
+        waterlooandcity()
+    if words == ['m', 'e', 't', 'r', 'o', 'p', 'o', 'l', 'i', 't', 'a', 'n'
+                 'w', 'a', 't', 'e', 'r', 'l', 'o', 'o']:
+        metropolitan()
+        waterlooandcity()
+    if words == ['m', 'e', 't', 'r', 'o', 'p', 'o', 'l', 'i', 't', 'a', 'n',
+                 'o', 'v', 'e', 'r', 'g', 'r', 'o', 'u', 'n', 'd']:
+        metropolitan()
+        overground()
+    if words == ['m', 'e', 't', 'r', 'o', 'p', 'o', 'l', 'i', 't', 'a', 'n'
+                 'd', 'l', 'r']:
+        metropolitan()
+        dlr()
+    if words == ['n', 'o', 'r', 't', 'h', 'a', 'n',
+                 'b', 'a', 'k', 'e', 'r', 'l', 'o', 'o']:
+        northan()
+        bakerloo()
+    if words == ['n', 'o', 'r', 't', 'h', 'a', 'n',
+                 'c', 'e', 'n', 't', 'r', 'a', 'l']:
+        northan()
+        central()
+    if words == ['n', 'o', 'r', 't', 'h', 'a', 'n',
+                 'c', 'i', 'r', 'c', 'l', 'e']:
+        northan()
+        circle()
+    if words == ['n', 'o', 'r', 't', 'h', 'a', 'n',
+                 'd', 'i', 's', 't', 'r', 'i', 'c', 't']:
+        northan()
+        district()
+    if words == ['n', 'o', 'r', 't', 'h', 'a', 'n',
+                 'h', 'a', 'm', 'm', 'e', 'r', 's', 'm', 'i', 't', 'h', 'a', 'n', 'd', 'c', 'i', 't', 'y']:
+        northan()
+        hammersmithandcity()
+    if words == ['n', 'o', 'r', 't', 'h', 'a', 'n',
+                 'h', 'a', 'm', 'm', 'e', 'r', 's', 'm', 'i', 't', 'h']:
+        northan()
+        hammersmithandcity()
+    if words == ['n', 'o', 'r', 't', 'h', 'a', 'n',
+                 'j', 'u', 'b', 'i', 'l', 'e', 'e']:
+        northan()
+        jubilee()
+    if words == ['n', 'o', 'r', 't', 'h', 'a', 'n',
+                 'm', 'e', 't', 'r', 'o', 'p', 'o', 'l', 'i', 't', 'a', 'n']:
+        northan()
+        metropolitan()
+    if words == ['n', 'o', 'r', 't', 'h', 'a', 'n',
+                 'p', 'i', 'c', 'c', 'a', 'd', 'i', 'l', 'l', 'y']:
+        northan()
+        piccadilly()
+    if words == ['n', 'o', 'r', 't', 'h', 'a', 'n',
+                 'v', 'i', 'c', 't', 'o', 'r', 'i', 'a']:
+        northan()
+        victoria()
+    if words == ['n', 'o', 'r', 't', 'h', 'a', 'n',
+                 'w', 'a', 't', 'e', 'r', 'l', 'o', 'o', 'a', 'n', 'd', 'c', 'i', 't', 'y']:
+        northan()
+        waterlooandcity()
+    if words == ['n', 'o', 'r', 't', 'h', 'a', 'n',
+                 'w', 'a', 't', 'e', 'r', 'l', 'o', 'o']:
+        northan()
+        waterlooandcity()
+    if words == ['n', 'o', 'r', 't', 'h', 'a', 'n',
+                 'o', 'v', 'e', 'r', 'g', 'r', 'o', 'u', 'n', 'd']:
+        northan()
+        overground()
+    if words == ['n', 'o', 'r', 't', 'h', 'a', 'n',
+                 'd', 'l', 'r']:
+        northan()
+        dlr()
+    if words == ['p', 'i', 'c', 'c', 'a', 'd', 'i', 'l', 'l', 'y',
+                 'b', 'a', 'k', 'e', 'r', 'l', 'o', 'o']:
+        piccadilly()
+        bakerloo()
+    if words == ['p', 'i', 'c', 'c', 'a', 'd', 'i', 'l', 'l', 'y'
+                 'c', 'e', 'n', 't', 'r', 'a', 'l']:
+        piccadilly()
+        central()
+    if words == ['p', 'i', 'c', 'c', 'a', 'd', 'i', 'l', 'l', 'y',
+                 'c', 'i', 'r', 'c', 'l', 'e']:
+        piccadilly()
+        circle()
+    if words == ['p', 'i', 'c', 'c', 'a', 'd', 'i', 'l', 'l', 'y',
+                 'd', 'i', 's', 't', 'r', 'i', 'c', 't']:
+        piccadilly()
+        district()
+    if words == ['p', 'i', 'c', 'c', 'a', 'd', 'i', 'l', 'l', 'y',
+                 'h', 'a', 'm', 'm', 'e', 'r', 's', 'm', 'i', 't', 'h', 'a', 'n', 'd', 'c', 'i', 't', 'y']:
+        piccadilly()
+        hammersmithandcity()
+    if words == ['p', 'i', 'c', 'c', 'a', 'd', 'i', 'l', 'l', 'y',
+                 'h', 'a', 'm', 'm', 'e', 'r', 's', 'm', 'i', 't', 'h']:
+        piccadilly()
+        hammersmithandcity()
+    if words == ['p', 'i', 'c', 'c', 'a', 'd', 'i', 'l', 'l', 'y',
+                 'j', 'u', 'b', 'i', 'l', 'e', 'e']:
+        piccadilly()
+        jubilee()
+    if words == ['p', 'i', 'c', 'c', 'a', 'd', 'i', 'l', 'l', 'y',
+                 'm', 'e', 't', 'r', 'o', 'p', 'o', 'l', 'i', 't', 'a', 'n']:
+        piccadilly()
+        metropolitan()
+    if words == ['p', 'i', 'c', 'c', 'a', 'd', 'i', 'l', 'l', 'y',
+                 'n', 'o', 'r', 't', 'h', 'a', 'n']:
+        piccadilly()
+        northan()
+    if words == ['p', 'i', 'c', 'c', 'a', 'd', 'i', 'l', 'l', 'y',
+                 'v', 'i', 'c', 't', 'o', 'r', 'i', 'a']:
+        piccadilly()
+        victoria()
+    if words == ['p', 'i', 'c', 'c', 'a', 'd', 'i', 'l', 'l', 'y',
+                 'w', 'a', 't', 'e', 'r', 'l', 'o', 'o', 'a', 'n', 'd', 'c', 'i', 't', 'y']:
+        piccadilly()
+        waterlooandcity()
+    if words == ['p', 'i', 'c', 'c', 'a', 'd', 'i', 'l', 'l', 'y',
+                 'w', 'a', 't', 'e', 'r', 'l', 'o', 'o']:
+        piccadilly()
+        waterlooandcity()
+    if words == ['p', 'i', 'c', 'c', 'a', 'd', 'i', 'l', 'l', 'y',
+                 'o', 'v', 'e', 'r', 'g', 'r', 'o', 'u', 'n', 'd']:
+        piccadilly()
+        overground()
+    if words == ['p', 'i', 'c', 'c', 'a', 'd', 'i', 'l', 'l', 'y',
+                 'd', 'l', 'r']:
+        piccadilly()
+        dlr()
+    if words == ['v', 'i', 'c', 't', 'o', 'r', 'i', 'a'
+                 'b', 'a', 'k', 'e', 'r', 'l', 'o', 'o']:
+        victoria()
+        bakerloo()
