@@ -1,7 +1,6 @@
 __author__ = 'OliPicard'
 from lxml import etree
 import requests
-import re
 '''
 -----------------------------------------------------------------
 tubey.py provides you the latest information on tube disruptions.
@@ -275,15 +274,93 @@ def dlr():
     )
     print(*nameeleven)
     print(*espeleven, sep='\n')
-    print(*statuseleven
+    print(*statuseleven)
 
-def bakerloocentral():
-    bakerloo()
+#multi-calls wrapped together. (First Attempt.)
+def centralbakerloo():
     central()
-
+    bakerloo()
+def centralcircle():
+    central()
+    circle()
+def centraldistrict():
+    central()
+    district()
+def centralhammersmithandcity():
+    central()
+    hammersmithandcity()
+def centraljubilee():
+    central()
+    jubilee()
+def centralmetropolitan():
+    central()
+    metropolitan()
+def centralnorthan():
+    central()
+    northan()
+def centralpiccadilly():
+    central()
+    piccadilly()
+def centralbakerloocircle():
+    central()
+    bakerloo()
+    circle()
+def centralbakerloodistrict():
+    central()
+    bakerloo()
+    district()
+def centralbakerloohammersmithandcity():
+    central()
+    bakerloo()
+    hammersmithandcity()
+def centralbakerloojubilee():
+    central()
+    bakerloo()
+    jubilee()
+def centralbakerloometropolitan():
+    central()
+    bakerloo()
+    jubilee()
+def centralbakerloonorthan():
+    central()
+    bakerloo()
+    northan()
+def centralbakerloopiccadilly():
+    central()
+    bakerloo()
+    piccadilly()
+def centralbakerloovictoria():
+    central()
+    bakerloo()
+    victoria()
+def centralbakerloowaterlooandcity():
+    central()
+    bakerloo()
+    waterlooandcity()
+def centralbakerloooverground():
+    central()
+    bakerloo()
+    overground()
+def centralbakerloodlr():
+    central()
+    bakerloo()
+    dlr()
 def quit():
     menu.loop = False
-
+def list():
+    bakerloo()
+    central()
+    circle()
+    district()
+    hammersmithandcity()
+    jubilee()
+    metropolitan()
+    northan()
+    piccadilly()
+    victoria()
+    waterlooandcity()
+    overground()
+    dlr()
 
 def menu():
     print('-' * 60)
@@ -298,14 +375,78 @@ while loop:
     words = input('').lower()  # Thanks to Wub Wub for helping me re-engineer this segment minus regex pattens.
     available_functions = {'bakerloo': bakerloo,
                            'central': central,
-                           'central bakerloo': lambda: central() or bakerloo()}
+                           'circle': circle,
+                           'district': district,
+                           'hammersmith and city': hammersmithandcity,
+                           'jubilee': jubilee,
+                           'metropolitan': metropolitan,
+                           'northan': northan,
+                           'piccadilly': piccadilly,
+                           'victoria': victoria,
+                           'waterloo and city': waterlooandcity,
+                           'overground': overground,
+                           'dlr': dlr,
+                           'all': list,
+                           'central bakerloo': centralbakerloo,
+                           'central circle': centralcircle,
+                           'central district': centraldistrict,
+                           'central hammersmith and city': centralhammersmithandcity,
+                           'central jubilee': centraljubilee,
+                           'central metropolitan': centralmetropolitan,
+                           'central northan': centralnorthan,
+                           'central piccadilly': centralpiccadilly,
+                           'central bakerloo circle': centralbakerloocircle,
+                           'central bakerloo district': centralbakerloodistrict,
+                           'central bakerloo hammersmith and city': centralbakerloohammersmithandcity,
+                           'central bakerloo jubilee': centralbakerloojubilee,
+                           'central bakerloo metropolitan': centralbakerloometropolitan,
+                           'central bakerloo northan': centralbakerloonorthan,
+                           'central bakerloo piccadilly': centralbakerloopiccadilly,
+                           'central bakerloo victoria': centralbakerloovictoria,
+                           'central bakerloo waterloo and city': centralbakerloowaterlooandcity,
+                           'central bakerloo overground': centralbakerloooverground,
+                           'central bakerloo dlr': centralbakerloodlr}
     try:
-        if words == "help":
-            for key in available_functions.keys():
-                print(key)
-                continue
         if words == "quit":
             loop = False
-        available_functions[words]()
+        elif words == "credits":
+            print('  _____           _                _  _            _ __    _  _  ')
+            print(' |_   _|  _  _   | |__     ___    | || |          | \'_ \  | || | ')
+            print('   | |   | +| |  | \'_ \   / -_)    \_, |    _     | .__/   \_, | ')
+            print('  _|_|_   \_,_|  |_.__/   \___|   _|__/   _(_)_   |_|__   _|__/  ')
+            print('Developed by OliPicard (http://github.com/olipicard)')
+            print('Contributions by')
+            print('Wub_Wub')
+            print('FlockofFire')
+            print('__Love__')
+        elif words == "help":
+            '''
+            for key in available_functions.keys():
+                sorted(key, reverse=True)
+                print(key) <- attempt at listing things with automation. thanks wub_wub!'''
+            print('The Basic Commands are as follows.')
+            print('bakerloo')
+            print('central')
+            print('circle')
+            print('district')
+            print('hammersmith and city')
+            print('jubilee')
+            print('metropolitan')
+            print('northan')
+            print('piccadilly')
+            print('victoria')
+            print('waterloo and city')
+            print('overground')
+            print('dlr')
+            print('-' * 60)
+            print('You can combine upto 3 lines together to fetch data related to certain lines.')
+            print('e.g.: central bakerloo circle')
+            print('This will return the line status of central, bakerloo and circle line.')
+            print('-' * 60)
+            print('Finally,\nYou can use the all command to list all the active lines.')
+            print('-' * 60)
+            input('Press Return once your ready to return back to command.')
+        else:
+            available_functions[words]()
     except KeyError:
-        print('Whoops!')
+        print('Oh Dear.')
