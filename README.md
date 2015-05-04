@@ -51,6 +51,8 @@ Many Thanks to the following 3rd party modules.
 [LXML](http://lxml.de/) for the etree module
 [Requests](http://docs.python-requests.org/en/latest/) for the awesome replacement for urllib.
 
+**(Note if your using the Tubey2 script you will only need Requests!)**
+
 Many Thanks to Transport for London for providing an awesome cloud based [tube line status](http://www.tfl.gov.uk/info-for/open-data-users/our-feeds) api.
 
 Crafted with love by [OliPicard](https://olipicard.com)
